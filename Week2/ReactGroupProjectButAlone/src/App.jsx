@@ -24,15 +24,15 @@ function App() {
     fetchData(APIURL, callback);
   }
 
-  function deleteBooknByIsbn(bookisbn) {
+  function deleteBookById(bookid) {
     //delete person by id
-    fetchData(`${APIURL}/${bookisbn}`, ()=>{}, 'DELETE') 
-    setPersons(persons.filter((person) => person.id !== personId));
+    fetchData(`${APIURL}/${bookid}`, ()=>{}, 'DELETE') 
+    setBook(books.filter((book) => book.id !== bookid));
   }
 
   function mutateBook(book) {
     //update person
-    if(book.isbn != ''){
+    if(book.id != '' && book.id != null){
       // put
       console.log('update book');
       updateBook(book);
@@ -44,27 +44,29 @@ function App() {
   }
 
   function createBook(book) {
+
     fetchData(`${APIURL}`, (book) => setBook([...books, book]), 'POST', book);
     console.log(book);
   }
 
   function updateBook(book) {
-    fetchData(`${APIURL}/${book.isbn}`, 
+    console.log(book.id);
+    fetchData(`${APIURL}/${book.id}`, 
     (book) => 
-      {setBook(books.map((p) => (p.isbn === book.isbn ? {...book} : p)));
+      {setBook(books.map((p) => (p.id === book.id ? {...book} : p)));
     }, 'PUT', book);
   }
 
   useEffect(() => {
-    //get all persons
+    //get all books
     getBooks((data) => setBook(data));
   }, []);
   
   return (
     <div className='Root'>
       <div className='JsonServerExcerise'>
-      <BookForm />
-      <BookList books={books}/>
+      <BookForm blankBook={blankBook} bookToEdit={BookToEdit} mutateBook={mutateBook}/>
+      <BookList Books={books} deleteBookById={deleteBookById} editBook={editBook} />
     
       </div>
 

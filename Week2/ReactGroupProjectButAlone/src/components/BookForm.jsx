@@ -25,19 +25,26 @@ function BookForm({blankBook, bookToEdit, mutateBook}) {
         <div>
             <h1>Edit Person</h1>
                 <form onSubmit={handleSubmit}>
-                    <label htmlFor="id">ISBN</label>
-                    <input id="id" readOnly placeholder="ISBN" />
-                    <label htmlFor="name">Name</label>
-                    <input id="name" type="text" onChange={handleChange} placeholder="name"  />
-                    <label htmlFor="age">Age</label>
-                    <input id="age" type="number" min="1" max="120" onChange={handleChange} placeholder="age"  />
-                    <label htmlFor="email">Email</label>
-                    <input id="email" type="email" onChange={handleChange} placeholder="email"  />
-                    <button type="Add">Update</button>
-                    <button onClick={()=>setBook(blankBook)}>Reset</button>
+                    <label htmlFor="isbn">ISBN</label>
+                    <input id="isbn" type="number" onChange={handleChange} value={book.isbn} />
+                    <label htmlFor="title">Title</label>
+                    <input id="title" type="text" onChange={handleChange} value={book.title}  />
+                    <label htmlFor="subtitle">Subtitle</label>
+                    <input id="subtitle" type="text" onChange={handleChange} value={book.subtitle} />
+                    <label htmlFor="author">Author</label>
+                    <input id="author" type="text" onChange={handleChange} value={book.author}  />
+                    <label htmlFor="publisher">Publisher</label>
+                    <input id="publisher" type="text" onChange={handleChange} value={book.publisher}  />
+                    <label htmlFor="published">Published</label>
+                    <input id="published" type="year" onChange={handleChange} value={book.published}  />
+                    <label htmlFor="pages">Pages</label>
+                    <input id="pages" type="number" onChange={handleChange} value={book.pages}  />
+                    <label htmlFor="website">Website</label>
+                    <input id="website" type="link" onChange={handleChange} value={book.website}  />
+                    <button className="btn btn-warning" type="Add">Update</button>
+                    <button className="btn btn-danger" onClick={()=>setBook(blankBook)}>Reset</button>
 
                 </form>
-
         </div>
     );
 }
